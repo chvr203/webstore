@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.tata.ecommerce.test.ProductDaoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-02-10T08:07:56" hostname="VishalRatnamMBP.domain.name" time="0.119">
+  <properties/>
+  <testcase name="mockGetAllProducts()" classname="com.tata.ecommerce.test.ProductDaoTest" time="0.119"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
