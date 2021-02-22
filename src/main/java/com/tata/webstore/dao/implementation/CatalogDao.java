@@ -16,7 +16,7 @@ public class CatalogDao implements ICatalogDao {
     private PreparedStatement catalogPreparedStatement,categoryPreparedStatement;
     private PreparedStatement pre;
 
-    CatalogDao() {
+    public CatalogDao() {
         conn = DBConnHelper.getConnection();
         if (conn != null) {
             System.out.println("Connected to DB..");

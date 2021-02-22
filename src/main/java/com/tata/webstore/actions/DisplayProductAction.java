@@ -7,9 +7,8 @@ import java.util.ResourceBundle;
 
 public class DisplayProductAction {
     private Connection conn;
-    private PreparedStatement catalogPreparedStatement;
     private ResourceBundle resourceBundle;
-    private Statement statement;
+    private PreparedStatement statement;
     private ResultSet resultSet;
 
     public void DisplayProductAction() throws SQLException {
@@ -17,12 +16,11 @@ public class DisplayProductAction {
         resourceBundle = ResourceBundle.getBundle("db");
 
         String query = resourceBundle.getString("listProduct");
-        catalogPreparedStatement = conn.prepareStatement(query);
-        catalogPreparedStatement.execute();
-        resultSet = statement.executeQuery(query);
+        statement = conn.prepareStatement(query);
+        resultSet = statement.executeQuery();
 
-        while(!resultSet.next()){
-            System.out.println(resultSet.getString(2));
+        while(resultSet.next()){
+            System.out.println(resultSet.getString(1));
         }
 
     }

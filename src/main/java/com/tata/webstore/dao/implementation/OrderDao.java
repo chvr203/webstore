@@ -22,7 +22,7 @@ public class OrderDao implements IOrderDao {
     private PreparedStatement preparedStatement;
     private PreparedStatement pre;
 
-    OrderDao() {
+    public OrderDao() {
         conn = DBConnHelper.getConnection();
         if (conn != null) {
             System.out.println("Connected to DB..");
@@ -34,13 +34,21 @@ public class OrderDao implements IOrderDao {
 
     @Override
     public void addOrder(Order order) throws SQLException {
-        String query = resourceBundle.getString("addOrder");
+        String query = resourceBundle.getString("addCreditCard");
         preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setBoolean(2, order.isOrderStatus());
-        preparedStatement.setDate(3, order.getOrderDate());
-        preparedStatement.setLong(4, order.getUserAccount().getUserId());
-        preparedStatement.setLong(5, order.getCreditCard().getCreditCardNumber());
-        preparedStatement.setLong(6, order.getShippingAddress().getAddressId());
+        preparedStatement.setLong(1, order.getCreditCard().getCardId());
+        preparedStatement.setLong(2, order.getCreditCard().getCreditCardNumber());
+        preparedStatement.setString(3, order.getCreditCard().getCardType());
+        preparedStatement.setDate(4, order.getCreditCard().getExpiryDate());
+//        preparedStatement.execute();
+
+        query = resourceBundle.getString("addOrder");
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setBoolean(1, order.isOrderStatus());
+        preparedStatement.setDate(2, order.getOrderDate());
+        preparedStatement.setLong(3, order.getUserAccount().getUserId());
+        preparedStatement.setLong(4, order.getCreditCard().getCardId());
+        preparedStatement.setLong(5, order.getShippingAddress().getAddressId());
         preparedStatement.execute();
         conn.close();
     }

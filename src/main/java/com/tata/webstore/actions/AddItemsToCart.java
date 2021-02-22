@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class AddItemsToCart {
-    Item item=new Item();
-    Cart cart = new Cart();
 
-    public void AddItemsToCart(Cart cart){
+    public Cart execute(Cart cart, Item item){
         cart.addItem(item);
+        return cart;
     }
 }

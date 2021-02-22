@@ -18,7 +18,7 @@ public class ProductDao implements IProductDao {
     private ResourceBundle resourceBundle;
     private PreparedStatement preparedStatement;
 
-    ProductDao() {
+    public ProductDao() {
         conn = DBConnHelper.getConnection();
         if (conn != null) {
             System.out.println("Connected to DB..");

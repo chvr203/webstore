@@ -16,7 +16,7 @@ public class UserAccountDao implements IUserAccountDao {
     private ResourceBundle resourceBundle;
     private PreparedStatement preparedStatement;
 
-    UserAccountDao() {
+    public UserAccountDao() {
         conn = DBConnHelper.getConnection();
         if (conn != null) {
             System.out.println("Connected to DB..");
@@ -28,7 +28,19 @@ public class UserAccountDao implements IUserAccountDao {
 
     @Override
     public void adduser(UserAccount userAccount) throws SQLException {
-        String query = resourceBundle.getString("addUser");
+        String query = resourceBundle.getString("addAddress");
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setLong(1, userAccount.getAddress().getAddressId());
+        preparedStatement.setString(2, userAccount.getAddress().getAddress());
+        preparedStatement.setString(3, userAccount.getAddress().getCity());
+        preparedStatement.setString(4, userAccount.getAddress().getState());
+        preparedStatement.setString(5, userAccount.getAddress().getCountry());
+        preparedStatement.setLong(6, userAccount.getAddress().getZip());
+        preparedStatement.setString(7, userAccount.getAddress().getType());
+        preparedStatement.setLong(8, userAccount.getAddress().getPhoneNumber());
+        preparedStatement.execute();
+
+        query = resourceBundle.getString("addUser");
         preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, userAccount.getFirstName());
         preparedStatement.setString(2, userAccount.getLastName());
@@ -54,7 +66,7 @@ public class UserAccountDao implements IUserAccountDao {
         userAccount.setFirstName(resultSet.getString(1));
         userAccount.setLastName(resultSet.getString(2));
         userAccount.setEmailId(resultSet.getString(3));
-        userAccount.setAddress(new Address().setAddressId(resultSet.getLong(4)));
+//        userAccount.setAddress(new Address().setAddressId(resultSet.getLong(4)));
         userAccount.setPassword(resultSet.getString(5));
         userAccount.setUserName(resultSet.getString(6));
         conn.close();

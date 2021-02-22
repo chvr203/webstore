@@ -19,7 +19,7 @@ public class CategoryDao implements ICategoryDao {
     private ResourceBundle resourceBundle;
     private PreparedStatement preparedStatement;
 
-    CategoryDao() {
+    public CategoryDao() {
         conn = DBConnHelper.getConnection();
         if (conn != null) {
             System.out.println("Connected to DB..");
@@ -36,6 +36,7 @@ public class CategoryDao implements ICategoryDao {
         preparedStatement.setString(1,product.getName());
         preparedStatement.setString(2,product.getDescription());
         preparedStatement.setDouble(3, product.getCost());
+        preparedStatement.setLong(4, product.getUnits());
         preparedStatement.execute();
     }
 

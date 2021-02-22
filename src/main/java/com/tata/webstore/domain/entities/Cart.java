@@ -1,14 +1,19 @@
 package com.tata.webstore.domain.entities;
 
+import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Cart {
-    private List<CartProduct> products;
-    private List<Item> items;
+    private List<CartProduct> products = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
-    public void addProduct(Product product){
+    public void addProduct(Product product, Long quantity){
         CartProduct cp = new CartProduct();
         cp.setProduct(product);
+        cp.setQuantity(quantity);
         products.add(cp);
     }
 
@@ -22,10 +27,10 @@ public class Cart {
 
     public Product getCartProduct(Product product){
         CartProduct cp  = products.stream().filter(cartp->cartp.getProduct().equals(product)).findFirst().orElse(null);
-        return products.indexOf(cp);
+        return cp.getProduct();
     }
-    public boolean addItem(Item item){
-        return true;
+    public void addItem(Item item){
+        items.add(item);
     }
 //
 //    public boolean removeItem(){
